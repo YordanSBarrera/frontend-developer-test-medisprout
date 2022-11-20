@@ -6,3 +6,17 @@ body {
 div{
     padding: 10px;
 }
+h1{
+    display: flex;
+   justify-content: center;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;   
+}
+.paper{
+    display: inline-block;
+    width: 80%;
+    justify-content: center;
+}
