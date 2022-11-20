@@ -1,0 +1,1 @@
+export const CommentDetail = () => {return <div>'Detail Comment'</div> }
