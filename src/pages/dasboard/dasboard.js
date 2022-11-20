@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import { SimpleCard } from "../../components/Card/simpleCard";
+import "../../style/style.css";
 export const Dasboard = () => {
   const [comments, setComments] = useState();
   useEffect(() => {
@@ -12,7 +13,16 @@ export const Dasboard = () => {
       <div>
         <ul>
           {arr.map((comment) => {
-            return <li key={comment.id}>{comment.name}</li>;
+            return (
+              <div key={comment.id}>
+                <SimpleCard
+                  name={comment.name}
+                  email={comment.email}
+                  comment={comment.body}
+                />
+              </div>
+            );
+            // <li key={comment.id}>{comment.name}</li>;
           })}
         </ul>
       </div>
@@ -20,9 +30,8 @@ export const Dasboard = () => {
   };
   return (
     <div>
-        <h1>Dasboard</h1>
+      <h1>Dasboard</h1>
       {comments ? PrintlistComment(comments) : "Error"}
-      
     </div>
   );
 };
