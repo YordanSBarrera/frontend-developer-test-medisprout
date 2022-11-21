@@ -1,43 +1,41 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { SimpleCard } from "../../components/Card/simpleCard";
+import { PrintlistComment } from "../../components/printListComment";
 import "../../style/style.css";
+import { DEFAULT_URL } from "../../utils/constants";
+
 export const Dasboard = () => {
   const [comments, setComments] = useState();
+  const [loading, setLoading] = useState();
+
   useEffect(() => {
-    fetch("http://jsonplaceholder.typicode.com/posts/1/comments")
-      .then((response) => response.json())
-      .then((data) => {
-        setComments(data);
-        localStorage.setItem("data", JSON.stringify(data));
-      });
+    setLoading(localStorage.getItem("load"));
+    console.log(localStorage.getItem("load"))
+    const UpData = async () => {
+      console.log("Dentro del Updata");
+      localStorage.setItem("load", "false");
+      const response = await fetch(DEFAULT_URL);
+      const data = await response.json();
+      setComments(data);
+      localStorage.setItem("data", JSON.stringify(data));
+      localStorage.setItem("load", "true");
+    };
+    //chequeando si los datos estan cargados para evitar recargar
+    if (localStorage.getItem("load")!=="true") {
+      UpData();
+      console.log("Debe Cargar");
+    }
+    setComments(JSON.parse(localStorage.getItem('data')));
   }, []);
-  const PrintlistComment = (arr) => {
-    return (
-      <div>
-        <ul>
-          {arr.map((comment) => {
-            return (
-              <div key={comment.id}>
-                <Link to={`/comment/${comment.id}`}>
-                  <SimpleCard
-                    name={comment.name}
-                    email={comment.email}
-                    comment={comment.body}
-                  />
-                </Link>
-              </div>
-            );
-            // <li key={comment.id}>{comment.name}</li>;
-          })}
-        </ul>
-      </div>
-    );
-  };
+  
   return (
     <div>
       <h1>Dasboard</h1>
-      {comments ? PrintlistComment(comments) : "Error"}
+      {console.log(localStorage.getItem("load"))}
+      {loading
+        ? 
+         comments
+        ? PrintlistComment(comments)
+        : "Loading...":"Loading..."}
     </div>
   );
 };
