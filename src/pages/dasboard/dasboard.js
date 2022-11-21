@@ -9,9 +9,7 @@ export const Dasboard = () => {
 
   useEffect(() => {
     setLoading(localStorage.getItem("load"));
-    console.log(localStorage.getItem("load"))
     const UpData = async () => {
-      console.log("Dentro del Updata");
       localStorage.setItem("load", "false");
       const response = await fetch(DEFAULT_URL);
       const data = await response.json();
@@ -20,22 +18,20 @@ export const Dasboard = () => {
       localStorage.setItem("load", "true");
     };
     //chequeando si los datos estan cargados para evitar recargar
-    if (localStorage.getItem("load")!=="true") {
+    if (localStorage.getItem("load") !== "true") {
       UpData();
-      console.log("Debe Cargar");
     }
-    setComments(JSON.parse(localStorage.getItem('data')));
+    setComments(JSON.parse(localStorage.getItem("data")));
   }, []);
-  
+
   return (
     <div>
       <h1>Dasboard</h1>
-      {console.log(localStorage.getItem("load"))}
       {loading
-        ? 
-         comments
-        ? PrintlistComment(comments)
-        : "Loading...":"Loading..."}
+        ? comments
+          ? PrintlistComment(comments)
+          : "Loading..."
+        : "Loading..."}
     </div>
   );
 };
