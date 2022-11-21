@@ -10,7 +10,7 @@ export const SimpleCard = (props) => {
         <Typography variant="h5" component="div">
           {props.name}
         </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.primary">
+        <Typography sx={{ fontSize: 18 }} variant="h4" color="text.primary">
           {props.email}
         </Typography>
         <Typography variant="h6" color="text.secondary">
