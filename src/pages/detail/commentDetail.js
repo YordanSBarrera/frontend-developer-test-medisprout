@@ -6,8 +6,17 @@ import "../../style/style.css";
 export const CommentDetail = () => {
   const [comment, setComment] = useState();
   const { id } = useParams();
+
+  
   useEffect(() => {
-    setComment(JSON.parse(localStorage.getItem("data"))[0]);
+    const findComment = () => {
+      setComment(
+        JSON.parse(localStorage.getItem("data")).filter(
+          (elem) => elem.id == id
+        )[0]
+      );
+    };
+    findComment();
   }, []);
   const PrintDetail = (comment) => {
     return (
