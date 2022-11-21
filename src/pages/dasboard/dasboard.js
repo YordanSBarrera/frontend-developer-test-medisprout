@@ -26,7 +26,7 @@ export const Dasboard = () => {
 
   return (
     <div>
-      <h1>Dasboard</h1>
+      <h1>Comments List</h1>
       {loading
         ? comments
           ? PrintlistComment(comments)

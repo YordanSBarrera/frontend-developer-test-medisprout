@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   background-color: #d9afd9;
   background-image: linear-gradient(292deg, #d9afd9 0%, #97d9e1 100%);
@@ -6,20 +11,28 @@ body {
 div {
   padding: 10px;
 }
-h1 {
+h1,h2,
+h3{
   display: flex;
   justify-content: center;
+}
+.h3 {
+  color: rgb(46, 34, 34);
+}
+h2{
+  color: rgb(129, 129, 100);
 }
 .button {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
+.container {
+  margin: 5px 30px 10px 30px;
+}
 .paper {
-  display: inline-block;
-  width: auto;
   justify-content: center;
 }
-a:link{
-    text-decoration: none;
+a:link {
+  text-decoration: none;
 }
