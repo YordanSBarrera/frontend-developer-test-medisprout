@@ -5,21 +5,32 @@ import { DEFAULT_URL } from "../../utils/constants";
 
 export const Dasboard = () => {
   const [comments, setComments] = useState();
-  const [loading, setLoading] = useState();
+  const [error, setError] = useState([]);
 
   useEffect(() => {
-    setLoading(localStorage.getItem("load"));
     const UpData = async () => {
-      localStorage.setItem("load", "false");
       const response = await fetch(DEFAULT_URL);
       const data = await response.json();
-      setComments(data);
       localStorage.setItem("data", JSON.stringify(data));
-      localStorage.setItem("load", "true");
     };
-    //chequeando si los datos estan cargados para evitar recargar
-    if (localStorage.getItem("load") !== "true") {
-      UpData();
+    try {
+      console.log(!localStorage.getItem("data"));
+      //chequeando si los datos estan cargados para evitar recargar
+      if (!localStorage.getItem("data")) {
+        UpData();
+      }
+      setComments(JSON.parse(localStorage.getItem("data")));
+    } catch (error) {
+      if (error instanceof TypeError) {
+        console.log("Type Error");
+      }
+      if (error instanceof SyntaxError) {
+        console.log("Syntax Error");
+      }
+      if (error instanceof ReferenceError) {
+        console.log("Reference Error");
+      }
+      setError().push(error);
     }
     setComments(JSON.parse(localStorage.getItem("data")));
   }, []);
@@ -27,10 +38,10 @@ export const Dasboard = () => {
   return (
     <div>
       <h1>Comments List</h1>
-      {loading
-        ? comments
-          ? PrintlistComment(comments)
-          : "Loading..."
+      {error.length > 0
+        ? "Error"
+        : comments
+        ? PrintlistComment(comments)
         : "Loading..."}
     </div>
   );
