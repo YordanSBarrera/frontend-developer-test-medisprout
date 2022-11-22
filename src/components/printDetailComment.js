@@ -11,13 +11,20 @@ export const PrintDetailComment = (comment) => {
             <span>e-mail:</span>
             {comment.email}
           </h3>
-          <h2>Comment: {comment.body}</h2>
+          <h2>
+            <span>Comment:</span> {comment.body}
+          </h2>
           <div className="row">
             <div className="item">
-              <p><span>PostId:</span> {comment.postId}</p>
+              <p>
+                <span>PostId:</span> {comment.postId}
+              </p>
             </div>
             <div className="item">
-              <p><span>ID:</span>{comment.id}</p>
+              <p>
+                <span>ID:</span>
+                {comment.id}
+              </p>
             </div>
           </div>
         </div>
